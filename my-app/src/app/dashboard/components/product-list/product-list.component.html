@@ -1,0 +1,52 @@
+<mat-sidenav-container class="food-container">
+  <mat-sidenav mode="side" class="food-sidenav" opened>
+    <mat-button-toggle-group #group="matButtonToggleGroup" id="mtbt">
+      <mat-button-toggle (click)="setToggleValue('v')" mat-raised-button id="辣" value="v">辣</mat-button-toggle>
+      <mat-button-toggle (click)="setToggleValue('n')" mat-raised-button id="不辣" value="n">不辣</mat-button-toggle>
+    </mat-button-toggle-group>
+    <br/><br/>
+    <label for="price-range">价格范围</label><br/>
+    <mat-slider id="price-range" min="10" max="60" [(ngModel)]="price" thumbLabel></mat-slider>
+    <br/>
+    <form>
+      <mat-form-field>
+        <mat-select (selectionChange)="search()" [(ngModel)]="selectedMaterial" placeholder="肉类" name="material">
+          <mat-option *ngFor="let material of materials" [value]="material.value">
+            {{material.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br/>
+      <mat-form-field>
+        <mat-select (selectionChange)="search()" placeholder="菜类" [(ngModel)]="selectedType" name="type">
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-card *ngFor="let food of foods$ | async" class="food-card">
+      <mat-card-header class="food-card-header">
+        <mat-card-title><h3>{{ food.name }} </h3></mat-card-title>
+
+      </mat-card-header>
+      <mat-card-content>
+        <img width="150" src="{{food.image}}" alt="Photo of food">
+        <ul class="food-list">
+          <li>{{food.material}}</li>
+          <li>{{food.type}}</li>
+          <li>{{food.food}}</li>
+
+        </ul>
+      </mat-card-content>
+      <div class="food-card-bottom">价格： {{food.price}} /-</div>
+      <mat-card-actions class="food-card-bottom">
+        <button routerLink="/detail/{{food.id}}" mat-raised-button>下单</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>

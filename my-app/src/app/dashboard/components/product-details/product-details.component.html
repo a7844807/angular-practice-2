@@ -1,0 +1,18 @@
+<mat-card *ngIf="food" class="food-card">
+    <mat-card-header>
+      <mat-card-title><h3>{{ food.name }} Details </h3></mat-card-title>
+      <mat-card-subtitle>{{food.food}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{food.image}}" alt="Photo of pizza">
+    <mat-card-content >
+      <ul>
+        <li>Base: {{food.material}}</li>
+        <li>Type {{food.type}}</li>
+        <li>Price: {{food.price}}</li>
+      </ul>
+  
+    </mat-card-content>
+    <mat-card-actions class="food-back-btn">
+      <button (click)="goback()" mat-raised-button>返回</button>
+    </mat-card-actions>
+  </mat-card>

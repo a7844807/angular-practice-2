@@ -1,0 +1,31 @@
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-nav-list>
+            <mat-list-item>
+                <mat-icon mat-list-icon class="chevron-button" (click)="isExpanded=!isExpanded" [ngClass]="{'rotated': isExpanded}">chevron_right</mat-icon>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="''">
+                <mat-icon mat-list-icon class="">home</mat-icon>
+                <span *ngIf="isExpanded">home</span>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="'product-list'">
+                <mat-icon mat-list-icon class="">dinner_dining</mat-icon>
+                <span *ngIf="isExpanded">foods</span>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="'configuration'">
+                <mat-icon mat-list-icon class="">settings</mat-icon>
+                <span *ngIf="isExpanded">setting</span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <div class="content">
+        <mat-toolbar>
+            <h4>Material Practice</h4>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>
+
