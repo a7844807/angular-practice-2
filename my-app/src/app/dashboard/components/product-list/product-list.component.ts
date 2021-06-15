@@ -12,7 +12,7 @@ import { FoodService } from '../../food.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
+  isExpanded: boolean = false;
   foods: Food[] = [];
   foods$!: Observable<Food[]>;
   private searchTerms = new Subject<any>();

@@ -5,11 +5,71 @@
   }
   
   .food-card {
-    max-width: 450px;
+    max-width: 400px;
     margin: 2px;
+    min-width: 20%;
   }
   
   .food-back-btn{
       display: flex;
       justify-content: flex-end;
   }
+
+  .food-edit-btn{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .col-sm{
+   
+  }
+  img{
+    padding-top: 20px;
+    padding-left:25%;
+    width: 80%;
+    height: 100%;
+  }
+  .food-state{
+    position:relative;
+    left:30%;
+    font-size: 21px;
+  }
+  input{
+    font-size: 21px;
+    max-width: 50%;
+  }
+  mat-select{
+    max-width: 35%;
+    font-size: 21px;
+  }
+  .backdrop{
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    }
+    .btn-close{
+      float:right;
+    }
+    .food-head{
+      padding-left: 10px;
+      padding-top: 10px;
+      float:left;
+      width:100%;
+    }
+    
+    mat-card-subtitle{
+      font-size: 21px;
+    }
+    .mat-card-header{
+      margin-left:-13px;
+      margin-right:-13px
+    }
+    .mat-card-actions{
+      margin-right:12px;
+    }
+    mat-option{
+      font-size: 21px;
+    }

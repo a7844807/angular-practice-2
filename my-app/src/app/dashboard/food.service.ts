@@ -8,7 +8,7 @@ import { Food } from './food';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class FoodService {
   private foodURL = 'api/foods'; 

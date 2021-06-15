@@ -1,0 +1,27 @@
+<!--<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="paymentDetailId" [value]="service.formData.shopDetailId" />
+    <div class="form-group">
+        <label>店主名字</label>
+        <input class="form-control form-control-lg" placeholder="Full Name" name="shopOwnerName"
+            #cardOwnerName="ngModel" [(ngModel)]="service.formData.shopOwnerName"
+            required [class.invalid]="cardOwnerName.invalid && cardOwnerName.touched">
+    </div>
+    <div class="form-group">
+        <label>联系电话</label>
+        <input class="form-control form-control-lg" placeholder="10 Digit Contact Number" name="contactNumber"
+            #cardNumber="ngModel" [(ngModel)]="service.formData.contactNumber"
+            required maxlength="10" minlength="10" [class.invalid]="cardNumber.invalid && cardNumber.touched">
+    </div>
+    <div class="form-row">
+        
+        <div class="form-group col-md-6">
+            <label>EMAIL 地址</label>
+            <input class="form-control form-control-lg" placeholder="·····@··.com" name="emailDate"
+                #expirationDate="ngModel" [(ngModel)]="service.formData.address"
+                required maxlength="25" minlength="0" [class.invalid]="expirationDate.invalid && expirationDate.touched">
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    </div>
+</form>-->

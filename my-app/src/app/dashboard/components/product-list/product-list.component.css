@@ -1,5 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
 .food-container {
   position: relative;
   top: 10;
@@ -8,36 +9,60 @@
   right: 0;
   background: #eee;
   min-height: 500px;
+  max-width: 100%;
 }
-
+@media screen and (max-width: 600px) {
 .food-sidenav {
   padding-top: 20px !important;
   padding-left: 20px;
   margin-top: 5px;
+  width: 180px;
+  
+}
+}
+@media screen and (min-width: 600px) {
+  .food-sidenav {
+    padding-top: 20px !important;
+    padding-left: 20px;
+    margin-top: 5px;
+    width: 280px;
+    
+  }
+  }
+mat-slider {
+  max-width: 100%;
 }
 
-mat-slider {
-  width: 300px;
+mat-select{
+  padding-right: 20%;
+  max-width: 100%;
 }
 
 .food-list {
   display: inline-block;
   position: relative;
-  top: -65px;
+  top: 15px;
   left: 0px;
+  padding-left: 35%;
 }
 
 .food-card {
-  max-width: 800px;
+  max-width: 100%;
   margin: 2px;
   border-bottom: 1px solid #c4c4d2;
 }
 
 .food-card-bottom {
   box-sizing: border-box;
-  width: 35%;
+  width: 50%;
   display: inline-block;
   text-align: right;
+  padding-top: 20%;
+  padding-left: 25%;
+}
+.button{
+  float:right;
+  position: relative;
 }
 
 .mat-button-toggle-checked {
@@ -46,4 +71,19 @@ mat-slider {
 
 .food-card-header {
   justify-content: center !important;
+}
+.mat-sidenav-content {
+  max-width: 100%;
+
+}
+
+.img{
+  max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: auto;
+        float:left;
+}
+.col-sm{
+  
 }

@@ -1,18 +1,214 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <mat-card *ngIf="food" class="food-card">
-    <mat-card-header>
-      <mat-card-title><h3>{{ food.name }} Details </h3></mat-card-title>
-      <mat-card-subtitle>{{food.food}}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="{{food.image}}" alt="Photo of pizza">
+  <div class="container-lg">
+    <div class="row">
+    <div class = "main">
+      <div class = "food-head">
+      <mat-card-title *ngIf="!visible">{{ food.name }}</mat-card-title>
+        <ng-container class = "row" *ngIf="visible"><input type="text" class="form-control" id="food.name"
+          [(ngModel)]="food.name" name="food.name" [value]="food.name" (valueChange)="saveFood(food, $event)"> 
+        </ng-container>
+      </div>
+      <br>
+      <div class = "food-head">
+      <mat-card-title *ngIf="!visible">{{food.food}}</mat-card-title>
+        <ng-container class = "row" *ngIf="visible">
+          <mat-select placeholder="菜类" [(ngModel)]="food.food" name="material">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+      </div>
+    </div>
     <mat-card-content >
-      <ul>
-        <li>Base: {{food.material}}</li>
-        <li>Type {{food.type}}</li>
-        <li>Price: {{food.price}}</li>
-      </ul>
-  
+      <!-- <button (click)="onclick()" type="button" class="btn  btn-danger">
+        {{save?"编辑":"保存"}}
+      </button> -->
+      <br>
+      <img mat-card-image  src="{{food.image}}" alt="Photo of food">
+      <div class="main">
+        <br>
+        <ng-container *ngIf="!visible">
+        <span class = "food-state">食材: {{food.material}}</span>
+      </ng-container>
+      <div class = "food-state">
+        <ng-container *ngIf="visible">食材: 
+          <mat-select *ngIf="editModeToggle" placeholder="菜类" [(ngModel)]="item.material" name="material">
+            <mat-option *ngFor="let material of materials" [value]="material.value">
+              {{material.viewValue}}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <mat-select *ngIf="signMaterial" placeholder="菜类" [(ngModel)]="item.material" name="material">
+          <mat-option *ngFor="let material of materials" [value]="material.value">
+            {{material.viewValue}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="signMaterial">
+          <button class="btn btn-outline-success" (click)="openMaterialWin()">Save</button>
+        </div>
+        <div *ngIf="signMaterial">
+          <button class="btn btn-outline-secondary" (click)="cancelMaterial()">Cancel</button>
+        </div>
+        <div *ngIf="!signMaterial">
+          <button class="btn btn-outline-primary" (click)="editMaterial()">Edit</button>
+        </div>
+      </div>
+      
+        <br>
+        <ng-container *ngIf="!visible">
+        <span class = "food-state">种类: {{food.type}}</span>
+        </ng-container>
+        <div class = "food-state">
+        <ng-container *ngIf="visible">种类: 
+          <mat-select *ngIf="editModeToggle" placeholder="菜类" [(ngModel)]="item.type" name="type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </mat-option>
+          </mat-select>
+        <!-- <input type="text" class="form-control" id="food.type"
+         [(ngModel)]="food.type" name="food.type" [value]="food.type" (valueChange)="saveFood(food, $event)"> -->
+        </ng-container>
+        <mat-select *ngIf="signType" placeholder="菜类" [(ngModel)]="item.type" name="type">
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="signType">
+          <button class="btn btn-outline-success" (click)="openTypeWin()">Save</button>
+        </div>
+        <div *ngIf="signType">
+          <button class="btn btn-outline-secondary" (click)="cancelType()">Cancel</button>
+        </div>
+        <div *ngIf="!signType">
+          <button class="btn btn-outline-primary" (click)="editType()">Edit</button>
+        </div>
+      </div>
+        <br>
+        <ng-container *ngIf="!visible">
+        <span class = "food-state">价格: {{food.price}}</span>
+      </ng-container>
+        <div class = "food-state">
+        <ng-container *ngIf="visible">价格: 
+          <input *ngIf="editModeToggle" type="text" class="form-control" id="food.price"
+          [(ngModel)]="item.price" name="food.price" [value]="item.price" (valueChange)="saveFood(food, $event)">  
+        </ng-container>
+
+        <input *ngIf="signInput" type="text" class="form-control" id="food.price"
+          [(ngModel)]="item.price" name="food.price" [value]="item.price" (valueChange)="saveFood(food, $event)">
+        <div *ngIf="signInput">
+          <button class="btn btn-outline-success" (click)="openSignWin()">Save</button>
+        </div>
+        <div *ngIf="signInput">
+          <button class="btn btn-outline-secondary" (click)="cancelSign()">Cancel</button>
+        </div>
+        <div *ngIf="!signInput">
+          <button class="btn btn-outline-primary" (click)="edit()">Edit</button>
+        </div>
+
+      </div>
+      </div>
+      <mat-card-actions class="food-edit-btn">
+        <button (click)="onclick()" *ngIf="save" mat-raised-button>{{save?"编辑":"保存"}}</button>
+        <button  *ngIf="!save" type="button" class="btn btn-primary" data-mdb-toggle="modal" 
+        (click)="openWin()" mat-raised-button>
+          保存
+          </button>
+         
+        <!-- <button (click)="onclick()" *ngIf="!save" mat-raised-button>{{save?"编辑":"保存"}}</button> -->
+      </mat-card-actions>
     </mat-card-content>
     <mat-card-actions class="food-back-btn">
       <button (click)="goback()" mat-raised-button>返回</button>
     </mat-card-actions>
+  </div>
+</div>
   </mat-card>
+
+
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="closeWin()">
+          x
+        </button>
+        <h4 class="modal-title">信息更改</h4>
+      </div>
+      <div class="modal-body">您已对产品信息进行了更改，请点击确认进行保存，或取消。</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" (click)="closeWin()">
+          取消
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveChange()">确定</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="backdrop" [ngStyle]="{'display':displaySign}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displaySign}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="cancelSign()">
+          x
+        </button>
+        <h4 class="modal-title">信息更改</h4>
+      </div>
+      <div class="modal-body">您已对产品信息进行了更改，请点击确认进行保存，或取消。</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" (click)="cancelSign()">
+          取消
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveSign()">确定</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="backdrop" [ngStyle]="{'display':displayMaterial}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayMaterial}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="cancelMaterial()">
+          x
+        </button>
+        <h4 class="modal-title">信息更改</h4>
+      </div>
+      <div class="modal-body">您已对产品信息进行了更改，请点击确认进行保存，或取消。</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" (click)="cancelMaterial()">
+          取消
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveMaterial()">确定</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="backdrop" [ngStyle]="{'display':displayType}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayType}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" (click)="cancelType()">
+          x
+        </button>
+        <h4 class="modal-title">信息更改</h4>
+      </div>
+      <div class="modal-body">您已对产品信息进行了更改，请点击确认进行保存，或取消。</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" (click)="cancelType()">
+          取消
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveType()">确定</button>
+      </div>
+    </div>
+  </div>
+  </div>

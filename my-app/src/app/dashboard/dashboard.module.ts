@@ -1,3 +1,4 @@
+//import { ShopDetailFormComponent } from './components/configuration/shop-detail-form/shop-detail-form.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
@@ -19,16 +20,22 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { InMemoryDataService } from './InMemoryData.service';
+//import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+//import { DialogComponent } from './components/dialog/dialog.component';
+
+//import { NgForm } from '@angular/forms';
 
 @NgModule({
   declarations: [
     WrapperComponent,
     ProductListComponent,
     ConfigurationComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    //DialogComponent
+   // ShopDetailFormComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +46,7 @@ import { InMemoryDataService } from './InMemoryData.service';
     MatToolbarModule,
     MatButtonToggleModule,
     MatSliderModule,
-    MatSidenavModule,
+    //MatSidenavModule,
     MatSelectModule,
     MatButtonToggleModule,
     MatCardModule,
@@ -50,6 +57,10 @@ import { InMemoryDataService } from './InMemoryData.service';
    // BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    //MatDialogModule,
+    //MatDialogRef,
+  //  NgForm,
 
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
